@@ -6,13 +6,11 @@ function App() {
     return state.users
   })
 
-  console.log(
-    data
-  );
+  
   return (
     <>
       <Navbar />
-      <UserDetails />
+      <UserDetails data = {data && data}/>
     </>
   );
 }

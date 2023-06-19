@@ -9,8 +9,16 @@ const userSlice = createSlice({
             console.log("reducer function user...", action.payload)
         },
 
-        removeUser(state, action) { },
-        deleteAllUsers(state, action) { },
+        removeUser(state, action) { 
+            let filteredState =  state.filter( (resp) => {
+                console.log(resp, action.payload)
+                return resp.id !== action.payload
+            }) 
+            return state = filteredState
+        },
+        deleteAllUsers(state, action) {
+            return state = []
+        },
     }
 });
 
