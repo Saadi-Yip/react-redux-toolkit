@@ -1,25 +1,19 @@
-  import { useEffect } from 'react';
 import Navbar from './components/Navbar';
-import UserDetails from './components/UserDetails'; 
+import UserDetails from './components/UserDetails';
+import { useSelector } from 'react-redux'; 
+function App() { 
+  const data = useSelector((state) => {
+    return state.users
+  })
 
-function App() {
-  useEffect(() => {
-    fetch("https://leilani-blogs.cyclic.app/service", {
-      headers: {
-        'Access-Control-Allow-Origin': true
-      }
-    })
-    .then(async response => {
-      let data = await response.json()
-      console.log(data);
-    })
-       
-  }, [])
+  console.log(
+    data
+  );
   return (
-    <div className="App">
-      <Navbar/>
-      <UserDetails/>
-    </div>
+    <>
+      <Navbar />
+      <UserDetails />
+    </>
   );
 }
 

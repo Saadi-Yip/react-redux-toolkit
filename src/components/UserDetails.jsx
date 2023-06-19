@@ -1,13 +1,34 @@
-import React from "react"; 
+import React, {useState} from "react"; 
+import { useDispatch } from "react-redux";
+import { userSlice } from "./store/slices/UserSlice";
 import styled from "styled-components";
 
 const UserDetails = () => {
+  const [data, setData] = useState();
+  const addUser = userSlice.actions.addUser;
+  const dispatch = useDispatch();
+const handleChange = (e) => { 
+  let key = e.target.name; 
+  setData({...data, [key]: e.target.value})
+}
+
+const handleSubmit = (e) => {
+  e.preventDefault(); 
+  dispatch(addUser(data));
+}
+
   return (
     <Wrapper>
       <div className="content">
         <div className="admin-table">
           <div className="admin-subtitle">List of User Details</div>
-          <button className="btn add-btn">Add New Users</button>
+          <form onSubmit={handleSubmit}>
+            <input type="text" name="name" placeholder="name" onChange={handleChange}/>
+            <input type="text" name="age" placeholder="age" onChange={handleChange}/>
+            <input type="email" name="email" placeholder="email" onChange={handleChange}/>
+            <input type="text" name="phone" placeholder="phone" onChange= {handleChange}/>
+            <button className="btn add-btn" type="submit">Add New Users</button>
+          </form>
         </div>
         <ul>
           {/* <li>Hi</li>
