@@ -1,6 +1,6 @@
 import React, {useState} from "react"; 
 import { useDispatch } from "react-redux";
-import { userSlice } from "./store/slices/UserSlice";
+import { userSlice } from "../store/slices/UserSlice";
 import styled from "styled-components";
 
 const UserDetails = () => {

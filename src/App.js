@@ -1,18 +1,8 @@
-import Navbar from './components/Navbar';
-import UserDetails from './components/UserDetails';
-import { useSelector } from 'react-redux'; 
+import ManageRoutes from './components/Routes';
 function App() { 
-  const data = useSelector((state) => {
-    return state.users
-  })
-
-  console.log(
-    data
-  );
   return (
     <>
-      <Navbar />
-      <UserDetails />
+      <ManageRoutes/>
     </>
   );
 }
