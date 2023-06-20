@@ -8,7 +8,6 @@ const userSlice = createSlice({
             state.push(action.payload);
             console.log("reducer function user...", action.payload)
         },
-
         removeUser(state, action) { },
         deleteAllUsers(state, action) { },
     }
