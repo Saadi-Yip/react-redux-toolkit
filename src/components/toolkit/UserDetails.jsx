@@ -3,20 +3,28 @@ import { useDispatch } from "react-redux";
 import { userSlice } from "../store/slices/UserSlice";
 import styled from "styled-components";
 
-const UserDetails = () => {
+const UserDetails = (props) => {
   const [data, setData] = useState();
   const addUser = userSlice.actions.addUser;
+  const removeUser = userSlice.actions.removeUser;
   const dispatch = useDispatch();
+const removeUsers = (id) => {
+  dispatch(removeUser(id));
+  console.log("id", id);
+}
+const removeAll = () => {
+  dispatch (userSlice.actions.deleteAllUsers());
+}
 const handleChange = (e) => { 
   let key = e.target.name; 
-  setData({...data, [key]: e.target.value})
+  let id = Math.random();
+  setData({...data, id,[key]: e.target.value}) 
 }
-
+ 
 const handleSubmit = (e) => {
   e.preventDefault(); 
   dispatch(addUser(data));
 }
-
   return (
     <Wrapper>
       <div className="content">
@@ -31,10 +39,16 @@ const handleSubmit = (e) => {
           </form>
         </div>
         <ul>
-          {/* <li>Hi</li>
-          <li>Hii</li> */}
+         {props.data && props.data.map((resp, index) =>{
+             return <li key = {resp.id}>
+                {resp.name}
+                <span><button onClick={() =>removeUsers(resp.id)}>delete</button></span>
+             </li>
+         })
+        }
         </ul>
         <hr /> 
+        <button onClick={removeAll} >Remove All Users</button>
       </div>
     </Wrapper>
   );
