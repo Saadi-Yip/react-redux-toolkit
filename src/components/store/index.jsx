@@ -1,14 +1,24 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import { userSlice } from "./slices/UserSlice";
 import { authSlice } from "./slices/AuthSlice";
 
-const store = configureStore({
+// Configuration for Redux Persist
+const persistConfig = {
+    key: 'auth',
+    storage,
+    // Add any additional configuration options if needed
+};
+
+const persistedReducer = persistReducer(persistConfig, authSlice.reducer);
+export const store = configureStore({
     reducer: {
         users: userSlice.reducer,
-        auth: authSlice.reducer
+        auth: persistedReducer
     }
 });
-export default store;
+export const persistor = persistStore(store);
 
 // Persisitor configuration
 //npm install redux-persist
