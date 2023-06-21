@@ -1,10 +1,10 @@
-import ManageRoutes from './components/Routes';
-function App() { 
+import ManageRoutes from "./pages/Routes";
+function App() {
   return (
     <>
-      <ManageRoutes/>
+      <ManageRoutes />
     </>
-  )
+  );
 }
 
 export default App;

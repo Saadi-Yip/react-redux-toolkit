@@ -1,9 +1,11 @@
-import React, { useState, useLayoutEffect } from 'react'
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import UsePostData from '../../../hooks/PostHook';
+import React, { useState } from 'react'
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux"; 
 import './login.css'
-import { authSlice } from '../../store/slices/AuthSlice';
+import { authSlice } from '../../../store/slices/AuthSlice';
+import UsePostData from './../../../hooks/api/PostHook'; 
+
+// Component Start Here... 
 const Login = () => {
   const [user, setUser] = useState();
   const { isLoading, error, postData } = UsePostData('https://backend-yip.cyclic.app/login');
@@ -11,14 +13,12 @@ const Login = () => {
 
   // Check Login  
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); 
-  useLayoutEffect(() => {
-    console.log(isLoggedIn);
-    if (isLoggedIn) {
-      navigate("/");
-    }
-  }, [isLoggedIn])
+  let location = useLocation();
   const login = authSlice.actions.login;
   const dispatch = useDispatch();
+  if(isLoggedIn) {
+    return <Navigate to="/" state={{ from: location}} replace />
+  }
   //get user email and password
   const changeHandler = (event) => {
     let key = event.target.name;
@@ -28,9 +28,7 @@ const Login = () => {
   const loginHandler = (event) => {
     event.preventDefault();
     postData(user)
-      .then((result) => {
-        // Handle the result if needed
-        console.log(result.email, ' Logged In Successfully!');
+      .then((result) => { 
         let data = {
           id: result._id,
           email: result.email,
@@ -52,14 +50,12 @@ const Login = () => {
           <form onSubmit={loginHandler} autoComplete="off">
             <input type="text" placeholder="Email address" name='email' onChange={changeHandler} required />
             <input type="password" placeholder="Password" name='password' onChange={changeHandler} required autoComplete="off" />
-            <a href="#">Forgot password?</a>
+            <a href="/login">Forgot password?</a>
             <input type="submit" className="forget" value={isLoading ? "loading..." : "Login"} disabled={isLoading} />
-            {error && <p>Error: {error}</p>}
-          </form>
+            {error && <p>Error: {error}</p>} 
+          </form> 
         </div>
-        <div className="form login">
-        </div>
-      </div>
+      </div> 
     </section>
   )
 }

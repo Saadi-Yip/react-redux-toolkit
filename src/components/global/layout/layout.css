@@ -1,0 +1,9 @@
+.layout {
+    display: flex;
+    background-color: blueviolet;
+    height: 100vh;
+} 
+.sidebar {
+    width: 30%;
+    background-color: brown;
+}

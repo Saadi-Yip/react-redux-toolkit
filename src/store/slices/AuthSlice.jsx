@@ -16,13 +16,11 @@ const authSlice = createSlice({
             }
             state.userInfo = user;
             state.isLoggedIn = true;
-            state.userToken = action.payload.token;
-            console.log(state)
+            state.userToken = action.payload.token; 
         },
         logout(state, action) {
             
-            state.isLoggedIn = false; 
-            console.log(state);
+            state.isLoggedIn = false;  
         }
     }
 });
