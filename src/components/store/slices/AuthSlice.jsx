@@ -20,7 +20,9 @@ const authSlice = createSlice({
             console.log(state)
         },
         logout(state, action) {
-            state = [];
+            
+            state.isLoggedIn = false; 
+            console.log(state);
         }
     }
 });

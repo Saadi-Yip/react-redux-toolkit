@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useLayoutEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import UsePostData from '../../../hooks/PostHook';
@@ -7,17 +7,18 @@ import { authSlice } from '../../store/slices/AuthSlice';
 const Login = () => {
   const [user, setUser] = useState();
   const { isLoading, error, postData } = UsePostData('https://backend-yip.cyclic.app/login');
-  const login = authSlice.actions.login;
-  const dispatch = useDispatch();
-  // Check Login
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-
   const navigate = useNavigate();
-  useEffect(() => {
+
+  // Check Login  
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); 
+  useLayoutEffect(() => {
+    console.log(isLoggedIn);
     if (isLoggedIn) {
       navigate("/");
     }
-  }, []);
+  }, [isLoggedIn])
+  const login = authSlice.actions.login;
+  const dispatch = useDispatch();
   //get user email and password
   const changeHandler = (event) => {
     let key = event.target.name;
@@ -29,7 +30,7 @@ const Login = () => {
     postData(user)
       .then((result) => {
         // Handle the result if needed
-        console.log(result.email, ' Logged In Successfully!' );
+        console.log(result.email, ' Logged In Successfully!');
         let data = {
           id: result._id,
           email: result.email,
@@ -48,11 +49,11 @@ const Login = () => {
       <div className="wrapper">
         <div className="form signup">
           <header>Dashboard</header>
-          <form onSubmit={loginHandler} autoComplete = "off">
+          <form onSubmit={loginHandler} autoComplete="off">
             <input type="text" placeholder="Email address" name='email' onChange={changeHandler} required />
-            <input type="password" placeholder="Password" name='password' onChange={changeHandler} required  autoComplete = "off"/>
+            <input type="password" placeholder="Password" name='password' onChange={changeHandler} required autoComplete="off" />
             <a href="#">Forgot password?</a>
-            <input type="submit" className="forget" value= {isLoading ? "loading..." : "Login"} disabled={isLoading} />
+            <input type="submit" className="forget" value={isLoading ? "loading..." : "Login"} disabled={isLoading} />
             {error && <p>Error: {error}</p>}
           </form>
         </div>
