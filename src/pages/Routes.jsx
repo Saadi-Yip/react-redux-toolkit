@@ -23,6 +23,13 @@ const ManageRoutes = () => {
             </ProtectedRoute>
           }
         />
+        <Route path = "/tasks" element = 
+          {
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
         </Route>
         <Route path="/login" element={<Login />} />
       </Routes>
