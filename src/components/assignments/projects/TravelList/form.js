@@ -1,17 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Form = () => {
-  return (
-    <form className='add-form'>
-      <h3>What do you need for your 🙂 trip?</h3>
-      <select>
-        <options value = {1}>1</options>
-        <options value = {2}>2</options>
-        <options value = {3}>3</options>
+  const [name, setName] = useState("")
+  const [selects, setSelected] = useState()
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+    setSelected(1);
+    setName("");
+  }
+  return ( 
+    <form className="add-form" onSubmit={handleSubmit}>
+      <h3>What do you need for your trip?</h3>
+      <select  value={selects} onChange={(e) => setSelected(e.target.value)}>
+        {Array.from({ length: 20 }, (_, i) => i + 1).map
+          ((num) => (
+            <option value={num} key={num}>
+              {num}
+            </option>
+          ))}
+        I
       </select>
-      <input type = "text" placeholder='Item...' />
+      <input type="text" placeholder="Item..." value={name} onChange={(e) => setName(e.target.value)} />
       <button>Add</button>
-    </form> 
+    </form>
   )
 }
 
