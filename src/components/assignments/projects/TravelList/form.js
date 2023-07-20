@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 
-const Form = () => {
+const Form = ({handleChangeItems}) => {
   const [name, setName] = useState("")
-  const [selects, setSelected] = useState()
+  const [selects, setSelected] = useState();
+  
   const handleSubmit = (e) => {
     e.preventDefault(); 
+    const newItem = {id:Math.random(), name, quantity:selects, packed: false}
     setSelected(1);
     setName("");
-  }
+    handleChangeItems(newItem)
+  } 
   return ( 
     <form className="add-form" onSubmit={handleSubmit}>
       <h3>What do you need for your trip?</h3>

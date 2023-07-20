@@ -1,4 +1,4 @@
- import Travel from './components/assignments/projects/TravelList/Main';
+import Travel from './components/assignments/projects/TravelList/Main';
 import './index.css';
 function App() { 
   return (
