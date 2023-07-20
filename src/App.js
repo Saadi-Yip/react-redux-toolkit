@@ -1,9 +1,10 @@
-import Travel from './components/assignments/projects/TravelList/Main';
+ 
+import Accordion from './components/assignments/projects/Accordion/accordion';
 import './index.css';
 function App() { 
   return (
     <div className='app'> 
-      <Travel/>
+      <Accordion/>
     </div> 
   )
 }
