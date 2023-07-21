@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import "./accordion.css";
+import AccordionList from "./accordionList";
 const faqs = [
   {
     title: "Where are these chairs assembled?",
@@ -15,23 +16,11 @@ const faqs = [
   },
 ];
 const Accordion = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const handleToggle = () => {
-    setIsOpen((isOpen) => !isOpen);
-  };
+   
   return (
     <div className="accordion">
-      {faqs.map((faq, index) => {
-        return (
-          <div className= {`item ${isOpen && 'open'}`} onClick={handleToggle}>
-            <span className="number">
-              {index < 8 ? `0${index + 1}` : `${index + 1}`}
-            </span>
-            <span className="title">{faq.title}</span>
-            <span className="icon">{!isOpen ? "+" : "-"}</span>
-            {isOpen && <span className="content-box">{faq.text}</span>}
-          </div>
-        );
+      {faqs.map(({title, text}, index) => {
+       return <AccordionList title={title} text={text} index = {index} key = {index}/>
       })}
     </div>
   );
