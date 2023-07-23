@@ -13,7 +13,7 @@ function Main({movies}) {
     <main className="main">
     <div className="box">
       <button
-        className="btn-toggle"
+        className="btn-toggle x"
         onClick={() => setIsOpen1((open) => !open)}
       >
         {isOpen1 ? "–" : "+"}
