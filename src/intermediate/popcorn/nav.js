@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import './styles.css'
 function Nav({movies}) {
     const [query, setQuery] = useState('');
   return (

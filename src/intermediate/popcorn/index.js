@@ -6,7 +6,7 @@ import { tempMovieData } from "./data";
 
 
 
-export default function App() { 
+export default function Apps() { 
   const [movies, setMovies] = useState(tempMovieData);
 
 
